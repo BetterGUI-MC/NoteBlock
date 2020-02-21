@@ -1,21 +1,12 @@
 package me.hsgamer.bettergui.noteblock;
 
+import me.hsgamer.bettergui.builder.CommandBuilder;
 import me.hsgamer.bettergui.object.addon.Addon;
 
 public final class Main extends Addon {
 
   @Override
-  public boolean onLoad() {
-    return true;
-  }
-
-  @Override
   public void onEnable() {
-    // Enable logic
-  }
-
-  @Override
-  public void onDisable() {
-    // Disable logic
+    CommandBuilder.register("sound:", PlaySound.class);
   }
 }
