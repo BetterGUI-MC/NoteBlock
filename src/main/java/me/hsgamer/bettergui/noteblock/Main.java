@@ -8,5 +8,7 @@ public final class Main extends Addon {
   @Override
   public void onEnable() {
     CommandBuilder.register("sound:", PlaySound.class);
+    CommandBuilder.register("raw-sound:", PlayRawSound.class);
+    CommandBuilder.register("music:", PlayMusic.class);
   }
 }
