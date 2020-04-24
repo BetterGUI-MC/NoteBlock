@@ -42,4 +42,10 @@ public final class Main extends Addon {
     CommandBuilder.register("raw-sound:", PlayRawSound.class);
     CommandBuilder.register("music:", PlayMusic.class);
   }
+
+  @Override
+  public void onReload() {
+    musicFiles.clear();
+    inputMusicFile(getDataFolder());
+  }
 }
