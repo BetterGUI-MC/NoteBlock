@@ -22,12 +22,18 @@ public final class Main extends Addon {
 
   @Override
   public boolean onLoad() {
-    for (File file : Objects.requireNonNull(getDataFolder().listFiles())) {
-      if (file.isFile()) {
-        musicFiles.put(file.getName(), file.toPath());
-      }
-    }
+    inputMusicFile(getDataFolder());
     return true;
+  }
+
+  private void inputMusicFile(File file) {
+    if (file.isDirectory()) {
+      for (File subFile : Objects.requireNonNull(file.listFiles())) {
+        inputMusicFile(subFile);
+      }
+    } else {
+      musicFiles.put(file.getName(), file.toPath());
+    }
   }
 
   @Override
