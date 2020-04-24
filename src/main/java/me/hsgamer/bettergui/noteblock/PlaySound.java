@@ -14,6 +14,7 @@ public class PlaySound extends Command {
   @Override
   public void addToTaskChain(Player player, TaskChain<?> taskChain) {
     String parsed = getParsedCommand(player);
-    taskChain.sync(() -> XSound.playSoundFromString(player, parsed).join());
+    taskChain.syncFuture(
+        () -> XSound.playSoundFromString(player, parsed).thenApply(vo -> "sound complete"));
   }
 }
