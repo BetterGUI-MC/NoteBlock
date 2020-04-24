@@ -14,8 +14,14 @@ public class PlayMusic extends Command {
   @Override
   public void addToTaskChain(Player player, TaskChain<?> taskChain) {
     String parsed = getParsedCommand(player);
-    taskChain.syncFuture(
-        () -> NoteBlockMusic.playMusic(player, player.getLocation(), parsed)
-            .thenApply(vo -> "music complete"));
+    if (Main.containsMusicFile(parsed)) {
+      taskChain.syncFuture(
+          () -> NoteBlockMusic.fromFile(player, player.getLocation(), Main.getMusicPath(parsed))
+              .thenApply(vo -> "music complete"));
+    } else {
+      taskChain.syncFuture(
+          () -> NoteBlockMusic.playMusic(player, player.getLocation(), parsed)
+              .thenApply(vo -> "music complete"));
+    }
   }
 }
